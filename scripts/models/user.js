@@ -3,7 +3,7 @@ define(['controllers/requestController'], function (request) {
     var userInstance;
     var user = function(user_id) {
         var cart = [],
-            favorite = [],
+            favorite = [];
             return  {
                 _id: user_id,
                 _rev : '',
