@@ -1,0 +1,21 @@
+<script id="entry-template" type="text/x-handlebars-template">
+<div id='items-container' class='row'>
+{{#each items}}
+<div class='col-xs-6 col-md-4 col-lg-3 ind-item-container' id={{this._id}}>
+
+    <img class='img-item' src = {{image this._id this.images.thumb}} >
+    <div class='details'>
+        <div class='deatil-first-row'>
+            <span class='title'><b>{{this.title}}</b></span>
+            <span class='price'> <b> &#8377; {{this.price}} </b></span>
+        </div>
+        <div class='detail-second-row'>
+            <div class='add-to-cart'></div>
+            <div class='favorites'></div>
+            <div class='buy'></div>
+        </div>
+    </div>
+</div>
+ {{/each}}
+ </div>
+</script>

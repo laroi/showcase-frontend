@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type='text/javascript' src='./libs/jquery-2.2.0.min.js'></script>
+<script src="./libs/bootstrap.min.js"></script>
+<script src="./libs/bootstrap-datepicker.min.js"></script>
+<script src="./libs/signals.min.js"></script> 
+<script src="./libs/crossroads.min.js"></script>
+<script src="./libs/handlebars-v4.0.5.js"></script>
+<script src="./libs/sdk.js"></script> 
+<script data-main='./scripts/app.js' type='text/javascript' src='./libs/require.js'></script>
+<link rel="stylesheet" href="./styles/bootstrap.min.css">
+<link rel="stylesheet" href="./styles/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./styles/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="./styles/nav-bar.css">
+<link rel="stylesheet" href="./styles/launch.css">
+<link rel="stylesheet" href="./styles/reg.css">
+</head>
+<body>
+<div class='container>
+    <div class='row'>
+        <div class='col-lg-12 nav-bar'>
+            <div class='button-group'>
+                <div class='cart'></div>
+                <div class='log log-in'></div>
+                <div class='log log-out'></div>
+                <div class='user-name'><b>Hey</b><span id='name'></span></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="main-container" class='container'>
+
+    <div class='row'>
+        <div id="left-container" class='col-lg-3 col-md-3 col-xs-3'>
+        
+        </div>    
+        <div id="right-container" class='col-lg-9 col-md-9 col-xs-3'> </div>
+    </div>
+    </div>
+    <!-- facebook script-->
+
+    <!-- facebook script-->
+</body>
+</html>

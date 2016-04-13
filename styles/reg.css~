@@ -1,0 +1,16 @@
+.modal-content {
+overflow:hidden;
+}
+.form-group {
+overflow:hidden;
+height:50%;
+}
+.modal-title{
+float:left;
+}
+.modal-pic {
+float:right;
+}
+.loc-name {
+margin-right:3px;
+}

@@ -1,0 +1,5 @@
+define([], function () {
+    $('.log-in').click(function(){
+        window.open('/secure/auth/facebook');
+    });	
+});

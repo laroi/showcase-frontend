@@ -1,0 +1,33 @@
+.nav-bar{
+    height:50px;
+    border-bottom:2px solid black;
+    padding-bottom:15px;
+    padding-right:0;
+    margin:0;
+    padding-top:5px;
+    padding-right:15px;
+}
+.user-name {
+float:right;
+margin-right:20px;
+line-height:35px;
+visibility:hidden;
+}
+.button-group{
+float:right;
+}
+.cart, .log {
+    width:32px;
+    height:32px;
+    float:right;
+    cursor:pointer;
+}
+.cart {
+
+    background-image: url('../../images/cart.png');
+
+}
+.log {
+    background-image: url('../../images/log-in.png');
+    margin-right:10px;
+}
