@@ -1,0 +1,11 @@
+{
+   "_id": "_design/main",
+   "_rev": "9-77fdf89ba9b37afecdccb6db34c58c8b",
+   "language": "javascript",
+   "views": {
+       "getAllTypesByDate": {
+           "map": "function(doc) {\n  emit([doc.gender_type, doc.dress_type, doc.dates.addedOn, doc.title, doc.price, doc.images.thumb ], 1);\n\n}",
+           "reduce": "_sum"
+       }
+   }
+}
