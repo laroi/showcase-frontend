@@ -16,12 +16,17 @@ requirejs.config({
 // Start the main app logic.
 requirejs(['./views/launch/launch', './views/mainHeader/mainHeader'],
 function (launch, header) {
-var launchPage;
+var launchPage, appid;
 $(document).ready(function() {
   $.ajaxSetup({ cache: true });
  // $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+ if (window.location.host === "ginza.com") {
+    appid = '1072039282817505';
+ } else {
+    appid = '1071484099539690';
+ }
     FB.init({
-      appId: '1072039282817505',
+      appId: appid,
       cookie     : true,
       xfbml      : true,
       version: 'v2.5' // or v2.0, v2.1, v2.2, v2.3
