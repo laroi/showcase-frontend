@@ -11,19 +11,23 @@ define(['../models/item', '../controllers/requestController', '../couch-views/vi
                 price = options.price;
             }
         requestController.callView({view_name: views.getAllItems, reduce: true}, function (err, data) {
-            data.rows.forEach(function (mat) {
-                console.log(JSON.stringify(mat));
-                item = new itemModel(mat.id);
-                item.gender_type = mat.key[0];
-                item.dress_type = mat.key[1];
-                item.dates.addedOn = mat.key[2];
-                item.title = mat.key[3];
-                item.price = mat.key[4];
-                item.images.thumb = mat.key[5] || "thumb.jpg";
-                items.push(item);
-                
-            });
-            callback(err, items);
+            if ((!err) && (Array.isArray(data.rows) &&  data.rows.length > 0)) {
+                data.rows.forEach(function (mat) {
+                    console.log(JSON.stringify(mat));
+                    item = new itemModel(mat.id);
+                    item.gender_type = mat.key[0];
+                    item.dress_type = mat.key[1];
+                    item.dates.addedOn = mat.key[2];
+                    item.title = mat.key[3];
+                    item.price = mat.key[4];
+                    item.images.thumb = mat.key[5] || "thumb.jpg";
+                    items.push(item);
+                    
+                });
+                callback(err, items);
+            } else {
+                callback((err || "No Data Found"), undefined)
+            }
         });
         
     };

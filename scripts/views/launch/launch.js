@@ -160,6 +160,9 @@ define([
                     var html = template({items: items});
                     $('#right-container').html(html);
                     callback();
+                } else {
+                    $('#right-container').html("<b>There was some problem in loading data</b>");
+                    callback();
                 }
             });
         }

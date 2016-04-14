@@ -43,7 +43,7 @@ define([
     activateLogout = function () {
         $('.log-in').hide();
         $('.log-out').show();
-        $('.user-name').css('visibility', 'block');
+        $('.user-name').css('visibility', 'visible');
         $('#name').html(stateObj.get('user').first_name);
         $('.log-out').on('click', handleLogout);    
     };
@@ -160,6 +160,8 @@ define([
                     var html = template({items: items});
                     $('#right-container').html(html);
                     callback();
+                } else {
+                    $('#right-container').html("<b>There was some problem in loading data</b>");
                 }
             });
         }
