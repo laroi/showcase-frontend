@@ -61,7 +61,7 @@ define(['text!./registerModel.html', '../../controllers/requestController', '../
                 dob : $('#datetimepicker1').data('datepicker').getFormattedDate('dd-mm-yyyy'),
                 prof_pic : user_details.picture.data.url
             }
-            request.put(config.api.url()+'user/'+user_details.id, data, function (err, data) {
+            request.put(config.api.url()+'user/'+user_details.id, data, 'application/x-www-form-urlencoded', function (err, data) {
                 if (!err) {
                     console.log(data);
                     

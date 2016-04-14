@@ -69,7 +69,7 @@ define(['../config/config'], function (config) {
             }
         }); 
     }
-    put = function (url, postdata, callback) {
+    put = function (url, postdata, contenttype, callback) {
         $.ajax({
             url: url, 
             method: 'PUT',

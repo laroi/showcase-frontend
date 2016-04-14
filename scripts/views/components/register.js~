@@ -64,6 +64,7 @@ define(['text!./registerModel.html', '../../controllers/requestController', '../
             request.put(config.api.url()+'user/'+user_details.id, data, function (err, data) {
                 if (!err) {
                     console.log(data);
+                    
                 } else {
                     console.log(err);
                 }

@@ -69,12 +69,12 @@ define(['../config/config'], function (config) {
             }
         }); 
     }
-    put = function (url, postdata, callback) {
+    put = function (url, postdata, contenttype, callback) {
         $.ajax({
             url: url, 
             method: 'PUT',
             data: postdata,
-            contentType: "application/json; charset=utf-8",
+            contentType: contenttype || "application/json; charset=utf-8",
             dataType: 'JSON',
             success: function (data){
                 callback(undefined, data);
