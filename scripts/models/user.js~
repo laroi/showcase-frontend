@@ -2,8 +2,6 @@ define(['controllers/requestController'], function (request) {
     //Do setup work here
     var userInstance;
     var user = function(user_id) {
-        var cart = [],
-            favorite = [],
             return  {
                 _id: user_id,
                 _rev : '',
@@ -16,13 +14,15 @@ define(['controllers/requestController'], function (request) {
                 location: {location:"", lat:"", long:""},
                 phone: '',
                 prof_pic: '',
-                addToCart: function (item) {
+                cart: [],
+                favorites:[],
+                addToCart: function (cart) {
+                    cart.push(cart);
+                    return;
                 },
-                addToFavorite: function (item) {
-                },
-                getCart : function () {
-                },
-                getFavorite: function () {
+                addToFavorite: function (favorites) {
+                    cart.push(favorites);
+                    return;
                 }
             };
         

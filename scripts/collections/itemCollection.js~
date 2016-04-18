@@ -1,4 +1,5 @@
 define(['../models/item', '../controllers/requestController', '../couch-views/views'], function (itemModel, requestController, views) {
+    var items = [];
     var getAllItems = function (options, callback) {
         var items = [], 
             item = {},
@@ -11,7 +12,7 @@ define(['../models/item', '../controllers/requestController', '../couch-views/vi
                 price = options.price;
             }
         requestController.callView({view_name: views.getAllItems, reduce: true}, function (err, data) {
-            if ((!err) && Array.isArray(data.rows) &&  data.rows.length > 0) {
+            if ((!err) && (Array.isArray(data.rows) &&  data.rows.length > 0)) {
                 data.rows.forEach(function (mat) {
                     console.log(JSON.stringify(mat));
                     item = new itemModel(mat.id);
@@ -25,11 +26,22 @@ define(['../models/item', '../controllers/requestController', '../couch-views/vi
                     
                 });
                 callback(err, items);
+            } else {
+                callback((err || "No Data Found"), undefined)
             }
         });
         
     };
+    var getItemById = function (id) {
+        items.forEach(function(item) {
+            if (item._id === id) {
+                return item;
+            }
+            return
+        })
+    };
     return {
-        getAllItems: getAllItems
+        getAllItems: getAllItems,
+        getItemById: getItemById
     }
 })

@@ -1,7 +1,7 @@
 define(['../models/item', '../controllers/requestController', '../couch-views/views'], function (itemModel, requestController, views) {
+    var items = [];
     var getAllItems = function (options, callback) {
-        var items = [], 
-            item = {},
+        var item = {},
             gender_type,
             dress_type,
             price;
@@ -31,7 +31,16 @@ define(['../models/item', '../controllers/requestController', '../couch-views/vi
         });
         
     };
+    var getItemById = function (id) {
+        items.forEach(function(item) {
+            if (item._id === id) {
+                return item;
+            }
+            return
+        })
+    };
     return {
-        getAllItems: getAllItems
+        getAllItems: getAllItems,
+        getItemById: getItemById
     }
 })

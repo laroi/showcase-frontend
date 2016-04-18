@@ -31,3 +31,13 @@ float:right;
     background-image: url('../../images/log-in.png');
     margin-right:10px;
 }
+.cart-count {
+    float: right;
+  position: relative;
+  top: 23px;
+  right: -3px;
+  border: 1px solid black;
+  border-radius: 25px;
+  width: 20px;
+  padding-left: 5px;
+}

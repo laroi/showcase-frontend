@@ -6,9 +6,10 @@ define([
     '../../controllers/requestController',
     '../../controllers/authController',
     '../../controllers/stateController',
-    '../components/register'
+    '../components/register/register',
+    '../components/cart/cart'
     
-], function (user, items, view, config, request, auth, state, register) {
+], function (user, items, view, config, request, auth, state, register, cart) {
     var source   = $(view).html(),
         facebook_cred,
         template = Handlebars.compile(source),
@@ -23,22 +24,31 @@ define([
         disableControls,
         byepassLogin = false,
         showBuy,
-        addToFavaorites,
+        addToFavorites,
         addToCart,
+        userObj,
+        populateCart,
         stateObj = new state.State(),
     setUser = function (user_data) {
-        var userObj = user.User(user_data._id);
-        userObj._rev = user_data._rev;
-        userObj.address = user_data.address;
-        userObj.dob = user_data.dob;
-        userObj.email = user_data.email;
-        userObj.first_name = user_data.first_name;
-        userObj.last_name = user_data.last_name;
-        userObj.gender = user_data.gender;
-        userObj.location = user_data.location;
-        userObj.phone = user_data.phone;
-        userObj.prof_pic = user_data.prof_pic;
-        stateObj.set('user', userObj);
+        if (!user_data) {
+            user_data = stateObj.get('user');
+        }
+        if (user_data._id) {
+            userObj = user.User(user_data._id);
+            userObj._rev = user_data._rev;
+            userObj.address = user_data.address;
+            userObj.dob = user_data.dob;
+            userObj.email = user_data.email;
+            userObj.first_name = user_data.first_name;
+            userObj.last_name = user_data.last_name;
+            userObj.gender = user_data.gender;
+            userObj.location = user_data.location;
+            userObj.phone = user_data.phone;
+            userObj.prof_pic = user_data.prof_pic;
+            userObj.cart = user_data.cart;
+            userObj.favorites = user_data.favorites;
+            stateObj.set('user', userObj);
+        }
     };
     activateLogout = function () {
         $('.log-in').hide();
@@ -63,7 +73,7 @@ define([
     }
     enableControls = function () {
         $('.buy').on('click', showBuy);
-        $('.favorites').on('click', addToFavaorites);
+        $('.favorites').on('click', addToFavorites);
         $('.add-to-cart').on('click', addToCart);
         $('.buy').css('cursor', 'pointer');
         $('.favorites').css('cursor', 'pointer');
@@ -81,11 +91,22 @@ define([
     showBuy = function () {
         console.log("Add Buy function logic here");
     };
-    addToFavaorites = function () {
-        console.log("Add addtofavorite function logic here");
+    populateCart = function () {
+        var cart = stateObj.get('user').cart || [];
+        $('.cart-count').html(cart.length || 0)
     };
-    addToCart = function () {
-        console.log("Add addtocart function logic here");
+    addToFavorites = function (e) {
+        var favorites = stateObj.get('user').favorites || [];
+        favroites.push($(e.target).parents('.ind-item-container').attr('id'))
+        stateObj.set('user.favorites', favorites);
+        userObj.addToFavorites(favorites);
+    };
+    addToCart = function (e) {
+        var cart = stateObj.get('user').cart || [];
+        cart.push($(e.target).parents('.ind-item-container').attr('id'))
+        stateObj.set('user.cart', cart);
+        userObj.addToCart(cart);
+        populateCart();
     };
     Handlebars.registerHelper('image', function(id, image) {
         return config.couchdb.url() + id + '/' + image;
@@ -131,6 +152,7 @@ define([
                         stateObj.set('cred', facebook_cred);
                         setUser(data);
                         activateControls();
+                        populateCart();
                         activateLogout();
                     }
                 });
@@ -162,6 +184,7 @@ define([
                     callback();
                 } else {
                     $('#right-container').html("<b>There was some problem in loading data</b>");
+                    callback();
                 }
             });
         }
@@ -169,6 +192,7 @@ define([
         init = function() {
             render(function () {
                 activateControls();
+                setUser();
                 activateLogin();
             });
         }();
