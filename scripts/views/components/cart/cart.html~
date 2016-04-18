@@ -1,0 +1,5 @@
+<script id="entry-template" type="text/x-handlebars-template">
+{{#each cart}}
+<div>cart.title</div>
+{{/each}}
+</script>
