@@ -31,13 +31,19 @@ define(['../models/item', '../controllers/requestController', '../couch-views/vi
         });
         
     };
-    var getItemById = function (id) {
-        items.forEach(function(item) {
+    var getItemById = function (ids, callback) {
+        ret_obj = [];
+        ids.forEach(function(id, index) {
+            items.forEach(function(item){
             if (item._id === id) {
-                return item;
+                ret_obj.push(item)
             }
-            return
-        })
+            if (index === ids.length -1) {
+                callback(ret_obj)
+            }
+        });
+        });
+
     };
     return {
         getAllItems: getAllItems,

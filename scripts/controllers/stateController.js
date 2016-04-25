@@ -42,7 +42,7 @@ define([], function () {
     return {
         State: function () {
             if (!stateInstance) {
-                stateInstance = state();
+                stateInstance = new state();
             }
             return stateInstance;
         }

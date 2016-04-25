@@ -5,14 +5,22 @@ define(['text!./cart.html', '../../../controllers/stateController', '../../../co
         stateObj = new State.State(),
         render;
     var render = function () {
-        var cartObj = [];
-        stateObj.get('user').cart.forEach(function(ind_cart) {
-            cartObj.push(items.getItemById(ind_cart))
+        var cartObj = [],
+            cart;
+	if (stateObj.get('user') && stateObj.get('user').cart) {
+		cart = stateObj.get('user').cart;
+	} else {
+		cart = [];
+	}
+    items.getItemById(cart, function(cart_obj){
+             var html = template({cart: cart_obj});
+            $('#nav-container').append(html);
+    })
+        cart.forEach(function(ind_cart) {
+//            cartObj.push(items.getItemById(ind_cart))
+
         });
-        var html = template({cart: cartObj});
-        $('body').append(html);
-        $('#cart').show();
-    };
+            };
     return {
         render: render
     };

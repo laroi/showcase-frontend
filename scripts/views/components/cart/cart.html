@@ -1,5 +1,12 @@
 <script id="entry-template" type="text/x-handlebars-template">
+<div id="cart">
 {{#each cart}}
-<div>{{cart.title}}</div>
+    <div class="cart_item">
+        <div class ="cart_item_title">{{title}}</div>
+        <div class="cart_item_count"></div>
+        <div class="cart_item_price"></div>
+        <div class="cart_item_delete"></div>
+    </div>
 {{/each}}
+</div>
 </script>
