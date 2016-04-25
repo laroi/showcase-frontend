@@ -96,11 +96,18 @@ define([
         var cart = stateObj.get('user').cart || [];
         $('.cart-count').html(cart.length || 0)
     };
-    addToFavorites = function (e) {
+    populateFavorites = function () {
         var favorites = stateObj.get('user').favorites || [];
-        favroites.push($(e.target).parents('.ind-item-container').attr('id'))
-        stateObj.set('user.favorites', favorites);
-        userObj.addToFavorites(favorites);
+        favorites.forEach(function(fav) {
+            $('#'+fav).find('.detail-second-row').find('.favorites').addClass('favorited')
+        })
+    }
+    addToFavorites = function (e) {
+        if ($(e.target).hasClass('favorited')) {
+            makeUnFavorite(e);
+        } else {
+            makeFavorite(e);
+        }
     };
     addToCart = function (e) {
         var cart = (stateObj.get('user') && stateObj.get('user').cart)? stateObj.get('user').cart : [];
@@ -109,6 +116,23 @@ define([
         userObj.addToCart(cart);
         populateCart();
     };
+    makeFavorite = function (e) {
+        var favorites = (stateObj.get('user') && stateObj.get('user').favorites)? stateObj.get('user').favorites : [];
+        favorites.push($(e.target).parents('.ind-item-container').attr('id'));
+        stateObj.set('user.favorites', favorites);
+        userObj.addToFavorite(favorites);
+        $(e.target).addClass('favorited'); 
+    }
+    makeUnFavorite = function (e) {
+        var favorites = (stateObj.get('user') && stateObj.get('user').favorites)? stateObj.get('user').favorites : [],
+            index = favorites.indexOf($(e.target).parents('.ind-item-container').attr('id'));
+        if (index > -1) {
+            favorites.splice(index,1);
+        }
+         stateObj.set('user.favorites', favorites);
+         userObj.addToFavorite(favorites);
+         $(e.target).removeClass('favorited');
+    }
     showCart = function () {
         if ($('#cart').css('display') === 'none') {
             $('#cart').show();
@@ -161,6 +185,7 @@ define([
                         setUser(data);
                         activateControls();
                         populateCart();
+                        populateFavorites();
                         activateLogout();
                     }
                 });
@@ -176,7 +201,8 @@ define([
                         setUser(data);
                         activateControls();
                         activateLogout();
-                        populateCart(); 
+                        populateCart();
+                        populateFavorites()
                         }
                     }); 
                                }
@@ -209,6 +235,7 @@ define([
                 cartView.render();
                 activateLogin();
                 populateCart();
+                populateFavorites();
             });
         }();
     };

@@ -1,0 +1,20 @@
+<script id="details" type="text/x-handlebars-template">
+<div id="details-container">
+    <div id="image-container">
+        <ul id='lightSlider'>
+            {{#each item.images}}
+            <li data-thumb="{{this.thumb}}" class="" style=""> 
+                <img src="{{this.full}}">
+            </li>
+            {{/each}}
+        </ul>    
+    </div>
+    <div id="details-detail-container">
+        <div id="detail-title"></div>
+        <div id='detail-description'></div>
+        <div id='detail-price'></div>
+        <div id='detail-stock'></div>
+        <div id='detail-comments'></div>
+    </div>
+</div>
+</script>
