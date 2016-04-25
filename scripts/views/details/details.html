@@ -10,11 +10,17 @@
         </ul>    
     </div>
     <div id="details-detail-container">
-        <div id="detail-title"></div>
-        <div id='detail-description'></div>
-        <div id='detail-price'></div>
-        <div id='detail-stock'></div>
-        <div id='detail-comments'></div>
+        <div id="detail-title">{{item.title}}</div>
+        <div id='detail-description'>{{item.description}}</div>
+        <div id='detail-price'>{{item.price}}</div>
+        <div id='detail-stock'>{{item.stock}}</div>
+        <div id='detail-comments'>
+            {{each item.comments}}
+                <div class="comment-by">{{this.author}}</div>
+                <div class="comment-body">{{this.body}}</div>
+                <div class="comment-time">{{this.time}}</div>
+            {{/each}}
+        </div>
     </div>
 </div>
 </script>
