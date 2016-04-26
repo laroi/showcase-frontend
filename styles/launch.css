@@ -16,6 +16,9 @@
 background-color: white;
   overflow:hidden;
 }
+#item-count-val{
+    width:100%
+}
 /*.details:after{
     content:'';
     position:relative;
@@ -77,4 +80,30 @@ border-right:2px solid black;
 }
 #right-container{
     padding-top:15px;
+}
+.cart_item {
+    float: left;
+    margin-left:5px;
+}
+#cart {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 150px;
+}
+.cart_item_cont {
+    overflow:hidden;
+}
+.cart_item_delete{
+    background-image: url('../../images/close.png');
+    height:16px;
+    width:16px;
+    cursor: pointer;
+}
+.show-cart {
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    width: 20%;
+    z-index:10;
 }

@@ -5,22 +5,28 @@ define(['text!./cart.html', '../../../controllers/stateController', '../../../co
         stateObj = new State.State(),
         render;
     var render = function () {
-        var cartObj = [],
+        var cart_array = [],
             cart;
-	if (stateObj.get('user') && stateObj.get('user').cart) {
-		cart = stateObj.get('user').cart;
-	} else {
-		cart = [];
-	}
-    items.getItemById(cart, function(cart_obj){
-             var html = template({cart: cart_obj});
-            $('#nav-container').append(html);
-    })
-        cart.forEach(function(ind_cart) {
-//            cartObj.push(items.getItemById(ind_cart))
-
-        });
-            };
+        if (stateObj.get('user') && stateObj.get('user').cart) {
+            cart = stateObj.get('user').cart;
+        } else {
+            cart = [];
+        }
+        cart.forEach(function(cart_item, index){
+            items.getItemById(cart_item.item, function(cart_obj){
+                cart_obj.count = cart_item.count;
+                cart_obj.total = parseInt(cart_obj.price,10)*parseInt(cart_obj.count, 10)
+                cart_array.push(cart_obj);
+                if (index === cart.length -1) {
+                     var html = template({cart: cart_array});
+                     $('.show-cart').html(html);
+                     $('.cart_item_delete').on('click', function () {
+                        console.log('delete_click');
+                    });
+                }
+            })
+        })
+    };
     return {
         render: render
     };

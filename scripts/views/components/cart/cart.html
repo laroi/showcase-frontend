@@ -1,11 +1,11 @@
 <script id="entry-template" type="text/x-handlebars-template">
-<div id="cart">
+<div id="cart" class="col">
 {{#each cart}}
-    <div class="cart_item">
-        <div class ="cart_item_title">{{title}}</div>
-        <div class="cart_item_count"></div>
-        <div class="cart_item_price"></div>
-        <div class="cart_item_delete"></div>
+    <div id={{_id}} class="cart_item_cont">
+        <div class ="cart_item cart_item_title">{{title}}</div>
+        <div class="cart_item cart_item_count">{{count}}</div>
+        <div class="cart_item cart_item_price">{{total}}</div>
+        <div class="cart_item cart_item_delete"></div>
     </div>
 {{/each}}
 </div>

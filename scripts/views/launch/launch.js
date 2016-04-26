@@ -7,9 +7,10 @@ define([
     '../../controllers/authController',
     '../../controllers/stateController',
     '../components/register/register',
+    '../components/addToCart/addToCart',
     '../components/cart/cart'
     
-], function (user, items, view, config, request, auth, state, register, cartView) {
+], function (user, items, view, config, request, auth, state, register, addToCartView,  cartView) {
     var source   = $(view).html(),
         facebook_cred,
         template = Handlebars.compile(source),
@@ -93,11 +94,11 @@ define([
         console.log("Add Buy function logic here");
     };
     populateCart = function () {
-        var cart = stateObj.get('user').cart || [];
+        var cart = stateObj.get('user') ? (stateObj.get('user').cart || []) : [];
         $('.cart-count').html(cart.length || 0)
     };
     populateFavorites = function () {
-        var favorites = stateObj.get('user').favorites || [];
+        var favorites = stateObj.get('user') ? (stateObj.get('user').favorites || []) : [];
         favorites.forEach(function(fav) {
             $('#'+fav).find('.detail-second-row').find('.favorites').addClass('favorited')
         })
@@ -110,11 +111,13 @@ define([
         }
     };
     addToCart = function (e) {
-        var cart = (stateObj.get('user') && stateObj.get('user').cart)? stateObj.get('user').cart : [];
+        addToCartView.render($(e.target).parents('.ind-item-container').attr('id'))
+/*      var cart = (stateObj.get('user') && stateObj.get('user').cart)? stateObj.get('user').cart : [];
         cart.push($(e.target).parents('.ind-item-container').attr('id'))
         stateObj.set('user.cart', cart);
         userObj.addToCart(cart);
         populateCart();
+        */
     };
     makeFavorite = function (e) {
         var favorites = (stateObj.get('user') && stateObj.get('user').favorites)? stateObj.get('user').favorites : [];
